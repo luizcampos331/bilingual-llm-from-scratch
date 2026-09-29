@@ -2,6 +2,8 @@
 
 *Série "LLM Bilíngue do Zero" · Artigo 0 · [Read in English](en.md)*
 
+![O roadmap como uma página de caderno de laboratório, com a missão 00 marcada](cover-pt.png)
+
 Em 2026, basta um comando para baixar um modelo de linguagem excelente e rodá-lo no notebook. Então por que alguém passaria seis meses construindo um modelo pior?
 
 Porque usar não é entender. E eu quero entender.
