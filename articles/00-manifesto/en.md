@@ -23,7 +23,7 @@ In late 2024 I wrote here about calling LLMs from Python, through OpenAI's API a
 
 ## What I'm building
 
-Twelve missions over 25 weeks, from September 28, 2026 to March 2027:
+Twelve missions over 25 weeks, from September 28, 2026 to March 2027. This manifesto is mission 0; the other eleven are:
 
 1. A model that predicts the next letter by counting character pairs, in pure Python.
 2. An automatic differentiation engine, the machinery that tells each number in a model which way to move, written from scratch.

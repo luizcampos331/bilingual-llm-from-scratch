@@ -23,7 +23,7 @@ No fim de 2024, escrevi aqui sobre como chamar LLMs a partir do Python, pela API
 
 ## O que vou construir
 
-São doze missões em 25 semanas, de 28 de setembro de 2026 a março de 2027:
+São doze missões em 25 semanas, de 28 de setembro de 2026 a março de 2027. Este manifesto é a missão 0; as outras onze são:
 
 1. Um modelo que prevê a próxima letra contando pares de caracteres, em Python puro.
 2. Um motor de gradientes (a regra que diz para onde ajustar cada número do modelo) escrito do zero.
