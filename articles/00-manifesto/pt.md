@@ -1,6 +1,6 @@
 # Vou construir um LLM do zero. Em público, e em dois idiomas.
 
-*Série "LLM Bilíngue do Zero" · Artigo 0 · [Read in English](en.md)*
+*Série "LLM Bilíngue do Zero" · Artigo 0 · [Read in English](en.md) · [Publicado no Medium](https://medium.com/@luizcampos331/vou-construir-um-llm-do-zero-em-p%C3%BAblico-e-em-dois-idiomas-eb6d93bb0ca1)*
 
 ![O roadmap como uma página de caderno de laboratório, com a missão 00 marcada](cover-pt.png)
 

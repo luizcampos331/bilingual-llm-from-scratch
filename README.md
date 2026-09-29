@@ -10,7 +10,7 @@ Open models are excellent and free to download. Using one is not the same as und
 
 This project rebuilds every piece by hand — tokenizer, gradients, attention, the training loop, fine-tuning — so that each decision can be explained, measured and tested. It is written from the perspective of a software engineer with an object-oriented background: every concept is mapped to classes, objects and interfaces, and the math is introduced only at the moment it is needed.
 
-Read the full manifesto: [English](articles/00-manifesto/en.md) · [Português](articles/00-manifesto/pt.md)
+Read the full manifesto on Medium: [English](https://medium.com/@luizcampos331/im-building-an-llm-from-scratch-in-public-in-two-languages-b6f25d06731b) · [Português](https://medium.com/@luizcampos331/vou-construir-um-llm-do-zero-em-p%C3%BAblico-e-em-dois-idiomas-eb6d93bb0ca1)
 
 ## Principles
 
@@ -24,7 +24,7 @@ Read the full manifesto: [English](articles/00-manifesto/en.md) · [Português](
 
 | # | Mission | Code | Article (EN) | Article (PT) |
 |---|---|---|---|---|
-| 0 | Manifesto and repository | — | [manifesto](articles/00-manifesto/en.md) | [manifesto](articles/00-manifesto/pt.md) |
+| 0 | Manifesto and repository | — | [Medium](https://medium.com/@luizcampos331/im-building-an-llm-from-scratch-in-public-in-two-languages-b6f25d06731b) · [source](articles/00-manifesto/en.md) | [Medium](https://medium.com/@luizcampos331/vou-construir-um-llm-do-zero-em-p%C3%BAblico-e-em-dois-idiomas-eb6d93bb0ca1) · [source](articles/00-manifesto/pt.md) |
 | 1 | Count-based bigram model (pure Python) | | | |
 | 2 | Micrograd: gradients and backpropagation | | | |
 | 3 | Tensors and a first neural network (PyTorch) | | | |
