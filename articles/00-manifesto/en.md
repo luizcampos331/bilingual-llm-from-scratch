@@ -1,6 +1,6 @@
 # I'm building an LLM from scratch. In public, in two languages.
 
-*Series "Bilingual LLM from Scratch" · Article 0 · [Leia em português](pt.md)*
+*Series "Bilingual LLM from Scratch" · Article 0 · [Leia em português](pt.md) · [Published on Medium](https://medium.com/@luizcampos331/im-building-an-llm-from-scratch-in-public-in-two-languages-b6f25d06731b)*
 
 ![The roadmap as a lab notebook page, with mission 00 checked](cover-en.png)
 
