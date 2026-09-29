@@ -103,8 +103,8 @@ def mission_00(lang: str) -> str:
         f'<text x="1070" y="790" {hand} font-size="44" transform="rotate(-3 1070 790)">{notes["ship"]}</text>',
         f'<path d="M 1150 752 C 1160 730, 1170 716, 1180 700" {stroke} stroke-width="3"/>',
         # context note in the top-right corner
-        f'<text x="1560" y="110" text-anchor="end" {hand} font-size="46" '
-        f'transform="rotate(-2 1560 110)">{notes["top"]}</text>',
+        f'<text x="1560" y="160" text-anchor="end" {hand} font-size="46" '
+        f'transform="rotate(-2 1560 160)">{notes["top"]}</text>',
     ]
     return page(mission_number("00", color) + "".join(checklist) + "".join(annotations))
 
