@@ -19,6 +19,8 @@ Construir do zero obriga a responder às perguntas que o atalho esconde:
 
 Tenho dez anos de carreira como desenvolvedor, a maior parte com Node.js. Coloquei em produção aplicações de back-end, front-end e mobile, e montei infraestruturas inteiras na AWS. Aprendi cada uma dessas coisas construindo, não lendo sobre elas. Vou aprender modelos de linguagem do mesmo jeito: escrevendo cada peça com as minhas mãos.
 
+No fim de 2024, escrevi aqui sobre como chamar LLMs a partir do Python, pela API da OpenAI e pelo Llama rodando localmente com o Ollama. Aquilo era o lado de fora da caixa. Esta série é sobre o lado de dentro.
+
 ## O que vou construir
 
 São doze missões em 25 semanas, de 28 de setembro de 2026 a março de 2027:
@@ -76,7 +78,7 @@ Todo o código deste projeto é meu, escrito com TDD, teste por teste. É ali qu
 
 ## Como acompanhar
 
-Toda semana sai algo: código, um post curto de progresso ou um artigo. O repositório é [bilingual-llm-from-scratch](https://github.com/luizcampos331/bilingual-llm-from-scratch), e os artigos saem aqui no LinkedIn.
+Toda semana sai algo: código, um post curto de progresso ou um artigo. O repositório é [bilingual-llm-from-scratch](https://github.com/luizcampos331/bilingual-llm-from-scratch), e os artigos saem aqui no Medium.
 
 O próximo artigo começa pelo modelo de linguagem mais simples possível: contar quais letras costumam vir depois de quais. Sem redes neurais e sem bibliotecas, só Python e um dicionário. Vai ser surpreendente o quanto dá para entender com tão pouco.
 

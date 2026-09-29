@@ -19,6 +19,8 @@ Building from scratch forces the questions the shortcut hides:
 
 I've spent ten years as a software developer, mostly in Node.js, shipping production back-end, front-end and mobile applications and building entire AWS infrastructures. I learned every one of those things by building, not by reading. I'm going to learn language models the same way: by writing every piece myself.
 
+In late 2024 I wrote here about calling LLMs from Python, through OpenAI's API and through Llama running locally with Ollama. That was the outside of the box. This series is about the inside.
+
 ## What I'm building
 
 Twelve missions over 25 weeks, from September 28, 2026 to March 2027:
@@ -76,7 +78,7 @@ All the code in this project is mine, written test-first, one test at a time. Th
 
 ## How to follow along
 
-Something ships every week: code, a short progress post or an article. The repository is [bilingual-llm-from-scratch](https://github.com/luizcampos331/bilingual-llm-from-scratch), and the articles are published here on LinkedIn.
+Something ships every week: code, a short progress post or an article. The repository is [bilingual-llm-from-scratch](https://github.com/luizcampos331/bilingual-llm-from-scratch), and the articles are published here on Medium.
 
 The next article starts with the simplest language model possible: counting which letters tend to follow which. No neural networks, no libraries, just Python and a dictionary. It's surprising how much you can understand with so little.
 
