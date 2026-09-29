@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Environments
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ML artifacts: datasets and checkpoints are large and reproducible; never commit them
+data/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+wandb/
+runs/
+
+# Mentoring harness (private)
+CLAUDE.md
+ROADMAP.md
+roadmap/
+references/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
