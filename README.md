@@ -43,7 +43,8 @@ Links are filled in as each mission ships.
 
 ```
 missions/NN-slug/    code and tests for each mission, with a short README
-articles/NN-slug/    en.md and pt.md, the canonical source of each article
+articles/NN-slug/    en.md and pt.md, the canonical source of each article, plus its covers
+tools/covers/        script that generates the article covers as SVG and PNG
 ```
 
 ## Getting started

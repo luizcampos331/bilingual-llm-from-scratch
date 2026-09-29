@@ -2,6 +2,8 @@
 
 *Series "Bilingual LLM from Scratch" · Article 0 · [Leia em português](pt.md)*
 
+![The roadmap as a lab notebook page, with mission 00 checked](cover-en.png)
+
 In 2026, one command downloads an excellent language model and runs it on your laptop. So why would anyone spend six months building a worse one?
 
 Because using is not understanding, and I want to understand.
