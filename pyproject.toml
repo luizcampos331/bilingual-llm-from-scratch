@@ -9,3 +9,13 @@ dependencies = []
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["missions"]
+pythonpath = ["missions/01-bigram/src"]
+addopts = ["--import-mode=importlib"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+extraPaths = ["missions/01-bigram/src"]
