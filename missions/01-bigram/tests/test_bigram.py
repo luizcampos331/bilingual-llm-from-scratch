@@ -55,3 +55,15 @@ class TestSampling:
         for _ in range(100):
             sample = bigram.sample_next("a", rng)
             assert sample in row
+
+    def test_same_seed_gives_same_result(self):
+        """Given "barbara" and two generators with the same seed, expect identical sequences of 20 samples after "a"."""
+        bigram = Bigram(["barbara"])
+        rng1 = random.Random(42)
+        rng2 = random.Random(42)
+        samples1 = []
+        samples2 = []
+        for _ in range(20):
+            samples1.append(bigram.sample_next("a", rng1))
+            samples2.append(bigram.sample_next("a", rng2))
+        assert samples1 == samples2
