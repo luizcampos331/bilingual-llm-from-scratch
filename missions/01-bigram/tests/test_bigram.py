@@ -104,3 +104,12 @@ class TestGeneration:
         name = bigram.generate(rng)
         assert START not in name
         assert END not in name
+
+    def test_generated_name_only_uses_known_characters(self):
+        """Given a model trained on "barbara", expect every character of 100 generated names to be one of "b", "a" or "r"."""
+        bigram = Bigram(["barbara"])
+        rng = random.Random(2147483647)
+        for _ in range(100):
+            name = bigram.generate(rng)
+            for char in name:
+                assert char in ["b", "a", "r"]
