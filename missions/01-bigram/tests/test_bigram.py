@@ -51,7 +51,7 @@ class TestSampling:
         """Given "barbara" and a seeded generator, expect every sample after "a" to be one of the keys of row("a") (b, a, r, <e>)."""
         bigram = Bigram(["barbara"])
         row = bigram.row("a")
-        rng = random.Random(42)
+        rng = random.Random(2147483647)
         for _ in range(100):
             sample = bigram.sample_next("a", rng)
             assert sample in row
@@ -59,11 +59,20 @@ class TestSampling:
     def test_same_seed_gives_same_result(self):
         """Given "barbara" and two generators with the same seed, expect identical sequences of 20 samples after "a"."""
         bigram = Bigram(["barbara"])
-        rng1 = random.Random(42)
-        rng2 = random.Random(42)
+        rng1 = random.Random(2147483647)
+        rng2 = random.Random(2147483647)
         samples1 = []
         samples2 = []
         for _ in range(20):
             samples1.append(bigram.sample_next("a", rng1))
             samples2.append(bigram.sample_next("a", rng2))
         assert samples1 == samples2
+
+    def test_fraction_of_r_after_a_matches_probability(self):
+        """Given 1000 samples after "a" in "barbara" with +1 smoothing (P = 3/7), expect the fraction of "r" to be 3/7 within 0.05 (pytest.approx abs)."""
+        bigram = Bigram(["barbara"])
+        rng = random.Random(2147483647)
+        samples = []
+        for _ in range(1000):
+            samples.append(bigram.sample_next("a", rng))
+        assert samples.count("r") / len(samples) == pytest.approx(3 / 7, abs=0.05)
