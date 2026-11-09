@@ -25,7 +25,7 @@ Read the full manifesto on Medium: [English](https://medium.com/@luizcampos331/i
 | # | Mission | Code | Article (EN) | Article (PT) |
 |---|---|---|---|---|
 | 0 | Manifesto and repository | — | [Medium](https://medium.com/@luizcampos331/im-building-an-llm-from-scratch-in-public-in-two-languages-b6f25d06731b) · [source](articles/00-manifesto/en.md) | [Medium](https://medium.com/@luizcampos331/vou-construir-um-llm-do-zero-em-p%C3%BAblico-e-em-dois-idiomas-eb6d93bb0ca1) · [source](articles/00-manifesto/pt.md) |
-| 1 | Count-based bigram model (pure Python) | | | |
+| 1 | Count-based bigram model (pure Python) | [code](missions/01-bigram/) | [Medium](https://medium.com/@luizcampos331/what-an-llm-really-does-with-nothing-but-counting-f6cf7a1e724d) · [source](articles/01-bigram/en.md) | [Medium](https://medium.com/@luizcampos331/o-que-um-llm-faz-de-verdade-s%C3%B3-contando-letras-7862ac08038b) · [source](articles/01-bigram/pt.md) |
 | 2 | Micrograd: gradients and backpropagation | | | |
 | 3 | Tensors and a first neural network (PyTorch) | | | |
 | 4 | BPE tokenizer | | | |

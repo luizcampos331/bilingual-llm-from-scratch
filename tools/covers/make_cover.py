@@ -109,7 +109,69 @@ def mission_00(lang: str) -> str:
     return page(mission_number("00", color) + "".join(checklist) + "".join(annotations))
 
 
-COVERS = {"00": ("00-manifesto", mission_00)}
+# --- Mission 01: the real row P(next | "a") learned by counting names.txt ----------
+
+NOTES_01 = {
+    "en": {"comment": "# top 10 of 27", "more": "... 17 more", "under": "count, then divide",
+           "end": ("a name often", "ends here"), "sum": "always 1", "top": "32,033 names"},
+    "pt": {"comment": "# 10 de 27", "more": "... mais 17", "under": "contar e dividir",
+           "end": ("muito nome", "acaba aqui"), "sum": "sempre 1", "top": "32.033 nomes"},
+}
+
+
+def row_after_a() -> tuple[list[tuple[str, float]], float, int]:
+    """Train the Mission 1 bigram on names.txt and return its top-10 row after "a", the row sum and size."""
+    mission = REPO_ROOT / "missions" / "01-bigram"
+    sys.path.insert(0, str(mission / "src"))
+    from bigram import Bigram  # noqa: E402
+
+    model = Bigram((mission / "data" / "names.txt").read_text().split())
+    row = model.row("a")
+    top = sorted(row.items(), key=lambda item: -item[1])[:10]
+    return top, sum(row.values()), len(row)
+
+
+def mission_01(lang: str) -> str:
+    color = LANG_COLOR[lang]
+    notes = NOTES_01[lang]
+    hand = f'font-family="{HAND}" fill="{color}" font-weight="700"'
+    stroke = f'fill="none" stroke="{color}" stroke-width="4" stroke-linecap="round"'
+    mono = f'font-family="{MONO}" font-size="30" fill="{INK}"'
+    top, total, size = row_after_a()
+    assert size == 27 and abs(total - 1) < 1e-9
+
+    lines = [f'<text x="540" y="186" {mono} font-weight="700" xml:space="preserve">&gt;&gt;&gt; model.row("a")'
+             f'<tspan fill="{FAINT_INK}" font-weight="500">   {notes["comment"]}</tspan></text>']
+    for i, (char, prob) in enumerate(top):
+        y = 250 + i * 50
+        label = char.replace("<", "&lt;").replace(">", "&gt;")
+        lines.append(f'<text x="560" y="{y}" {mono} font-weight="700">{label}</text>')
+        lines.append(f'<text x="660" y="{y}" {mono} font-weight="500">{prob:.3f}</text>')
+        lines.append(f'<rect x="800" y="{y - 22}" width="{prob * 2200:.1f}" height="24" rx="2" '
+                     f'fill="{INK}" fill-opacity="{0.85 if i == 0 else 0.55}"/>')
+    lines.append(f'<text x="560" y="760" {mono} font-weight="500" fill="{FAINT_INK}">{notes["more"]}</text>')
+    lines.append(f'<text x="900" y="760" {mono} font-weight="700">sum = {total:.1f}</text>')
+
+    annotations = [
+        # under the number
+        f'<text x="196" y="470" {hand} font-size="50" transform="rotate(-4 196 470)">{notes["under"]}</text>',
+        # arrow to the <e> bar (the most likely next "character" after "a")
+        f'<text x="1290" y="310" {hand} font-size="44" transform="rotate(-3 1290 310)">{notes["end"][0]}</text>',
+        f'<text x="1300" y="356" {hand} font-size="44" transform="rotate(-3 1300 356)">{notes["end"][1]}</text>',
+        f'<path d="M 1310 272 C 1290 252, 1270 244, 1246 240" {stroke}/>',
+        f'<path d="M 1264 228 L 1244 240 L 1262 254" {stroke}/>',
+        # sketchy circle around "sum = 1.0"
+        f'<ellipse cx="982" cy="750" rx="118" ry="36" transform="rotate(-2 982 750)" {stroke} stroke-width="3.5"/>',
+        f'<ellipse cx="986" cy="747" rx="124" ry="40" transform="rotate(1 986 747)" {stroke} stroke-width="2"/>',
+        f'<text x="1140" y="770" {hand} font-size="46" transform="rotate(-3 1140 770)">{notes["sum"]}</text>',
+        # context note in the top-right corner, inside Medium's preview crop
+        f'<text x="1560" y="160" text-anchor="end" {hand} font-size="46" '
+        f'transform="rotate(-2 1560 160)">{notes["top"]}</text>',
+    ]
+    return page(mission_number("01", color) + "".join(lines) + "".join(annotations))
+
+
+COVERS = {"00": ("00-manifesto", mission_00), "01": ("01-bigram", mission_01)}
 
 
 def render_png(svg: str, png_path: Path) -> None:
@@ -126,6 +188,7 @@ def render_png(svg: str, png_path: Path) -> None:
 def main(mission: str) -> None:
     folder, build = COVERS[mission]
     out_dir = REPO_ROOT / "articles" / folder
+    out_dir.mkdir(parents=True, exist_ok=True)
     for lang in LANG_COLOR:
         svg = build(lang)
         (out_dir / f"cover-{lang}.svg").write_text(svg, encoding="utf-8")
