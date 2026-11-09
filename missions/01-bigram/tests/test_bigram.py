@@ -1,4 +1,5 @@
-from bigram import Bigram
+import pytest
+from bigram import END, Bigram
 
 
 class TestCounting:
@@ -21,3 +22,11 @@ class TestCounting:
         assert bigram.count("b", "A") == 2
         assert bigram.count("A", "r") == 2
         assert bigram.count("a", "R") == 2
+
+
+class TestProbabilities:
+    def test_barbara_row_for_a_has_expected_probabilities(self):
+        """Given "barbara", expect the row for "a" to be ar = 2/3 and a<e> = 1/3 (pytest.approx)."""
+        bigram = Bigram(["barbara"])
+        assert bigram.probability("a", "r") == pytest.approx(2 / 3)
+        assert bigram.probability("a", END) == pytest.approx(1 / 3)
