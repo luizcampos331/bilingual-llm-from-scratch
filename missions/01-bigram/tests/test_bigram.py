@@ -113,3 +113,12 @@ class TestGeneration:
             name = bigram.generate(rng)
             for char in name:
                 assert char in ["b", "a", "r"]
+
+    def test_same_seed_generates_same_name(self):
+        """Given two rngs with the same seed (2147483647), expect generate() to return the same name for both."""
+        bigram = Bigram(["barbara"])
+        rng1 = random.Random(2147483647)
+        rng2 = random.Random(2147483647)
+        name1 = bigram.generate(rng1)
+        name2 = bigram.generate(rng2)
+        assert name1 == name2
