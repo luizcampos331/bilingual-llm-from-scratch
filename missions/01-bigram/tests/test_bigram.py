@@ -1,5 +1,5 @@
 import pytest
-from bigram import END, Bigram
+from bigram import END, START, Bigram
 
 
 class TestCounting:
@@ -35,3 +35,10 @@ class TestProbabilities:
         """Given "barbara" with +1 smoothing, expect the unseen pair ab to be (0 + 1) / (3 + 4) = 1/7."""
         bigram = Bigram(["barbara"])
         assert bigram.probability("a", "b") == pytest.approx(1 / 7)
+
+    def test_every_row_with_counts_sums_to_one(self):
+        """Given "barbara", expect every row with counts (<s>, b, a, r) to sum to 1."""
+        bigram = Bigram(["barbara"])
+        for first in [START, "b", "a", "r"]:
+            total = sum(bigram.row(first).values())
+            assert total == pytest.approx(1)

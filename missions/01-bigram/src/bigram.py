@@ -33,3 +33,10 @@ class Bigram:
             if first == first_char.lower()
         ) + len(self.next_chars)
         return (self.count(first_char, second_char) + 1) / denominator
+
+    def row(self, first_char: str) -> dict[str, float]:
+        """Return the distribution of next characters after first_char, as {second_char: P(second_char | first_char)}."""
+        row_dict = {}
+        for ch in self.next_chars:
+            row_dict[ch] = self.probability(first_char, ch)
+        return row_dict
