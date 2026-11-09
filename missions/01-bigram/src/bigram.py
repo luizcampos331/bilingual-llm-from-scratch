@@ -1,5 +1,7 @@
 """Character-level bigram language model (Mission 1)."""
 
+import random
+
 START = "<s>"
 END = "<e>"
 
@@ -37,6 +39,11 @@ class Bigram:
     def row(self, first_char: str) -> dict[str, float]:
         """Return the distribution of next characters after first_char, as {second_char: P(second_char | first_char)}."""
         row_dict = {}
-        for ch in self.next_chars:
+        for ch in sorted(self.next_chars):
             row_dict[ch] = self.probability(first_char, ch)
         return row_dict
+
+    def sample_next(self, first_char: str, rng: random.Random) -> str:
+        """Draw the next character after first_char, weighted by the row of first_char."""
+        row = self.row(first_char)
+        return rng.choices(list(row.keys()), weights=list(row.values()))[0]

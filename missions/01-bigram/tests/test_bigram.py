@@ -1,3 +1,5 @@
+import random
+
 import pytest
 from bigram import END, START, Bigram
 
@@ -42,3 +44,14 @@ class TestProbabilities:
         for first in [START, "b", "a", "r"]:
             total = sum(bigram.row(first).values())
             assert total == pytest.approx(1)
+
+
+class TestSampling:
+    def test_sample_after_a_is_always_in_row(self):
+        """Given "barbara" and a seeded generator, expect every sample after "a" to be one of the keys of row("a") (b, a, r, <e>)."""
+        bigram = Bigram(["barbara"])
+        row = bigram.row("a")
+        rng = random.Random(42)
+        for _ in range(100):
+            sample = bigram.sample_next("a", rng)
+            assert sample in row
