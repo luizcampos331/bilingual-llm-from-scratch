@@ -89,3 +89,8 @@ class TestLoss:
         """Given a model trained on "barbara", expect loss(["ab"]) to be finite thanks to +1 smoothing (no -ln(0))."""
         bigram = Bigram(["barbara"])
         assert math.isfinite(bigram.loss(["ab"]))
+
+    def test_seen_name_has_lower_loss_than_unseen_name(self):
+        """Given a model trained on "barbara", expect loss(["barbara"]) to be lower than loss(["ab"])."""
+        bigram = Bigram(["barbara"])
+        assert bigram.loss(["barbara"]) < bigram.loss(["ab"])
