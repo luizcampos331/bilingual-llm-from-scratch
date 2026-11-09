@@ -1,3 +1,4 @@
+import math
 import random
 
 import pytest
@@ -83,3 +84,8 @@ class TestLoss:
         """Given a model trained on "barbara", expect loss(["barbara"]) to be the mean of -ln P over its 8 pairs (about 0.931, pytest.approx)."""
         bigram = Bigram(["barbara"])
         assert bigram.loss(["barbara"]) == pytest.approx(0.931, abs=0.001)
+
+    def test_unseen_pairs_give_finite_loss(self):
+        """Given a model trained on "barbara", expect loss(["ab"]) to be finite thanks to +1 smoothing (no -ln(0))."""
+        bigram = Bigram(["barbara"])
+        assert math.isfinite(bigram.loss(["ab"]))
