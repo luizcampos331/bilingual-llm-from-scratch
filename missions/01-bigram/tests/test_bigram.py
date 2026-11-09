@@ -26,7 +26,12 @@ class TestCounting:
 
 class TestProbabilities:
     def test_barbara_row_for_a_has_expected_probabilities(self):
-        """Given "barbara", expect the row for "a" to be ar = 2/3 and a<e> = 1/3 (pytest.approx)."""
+        """Given "barbara" with +1 smoothing, expect the row for "a" to be ar = 3/7 and a<e> = 2/7 (pytest.approx)."""
         bigram = Bigram(["barbara"])
-        assert bigram.probability("a", "r") == pytest.approx(2 / 3)
-        assert bigram.probability("a", END) == pytest.approx(1 / 3)
+        assert bigram.probability("a", "r") == pytest.approx(3 / 7)
+        assert bigram.probability("a", END) == pytest.approx(2 / 7)
+
+    def test_unseen_pair_has_nonzero_probability(self):
+        """Given "barbara" with +1 smoothing, expect the unseen pair ab to be (0 + 1) / (3 + 4) = 1/7."""
+        bigram = Bigram(["barbara"])
+        assert bigram.probability("a", "b") == pytest.approx(1 / 7)
