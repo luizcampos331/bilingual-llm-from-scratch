@@ -1,5 +1,6 @@
 """Character-level bigram language model (Mission 1)."""
 
+import math
 import random
 
 START = "<s>"
@@ -14,14 +15,16 @@ class Bigram:
         self.bigram_count_pairs = {}
         self.next_chars = set()
         for name in names:
-            name_lower = name.lower()
-            name = [START] + list(name_lower) + [END]
-            for i in range(len(name) - 1):
-                bigram = (name[i], name[i + 1])
+            for bigram in self._pairs(name):
                 self.bigram_count_pairs[bigram] = (
                     self.bigram_count_pairs.get(bigram, 0) + 1
                 )
-                self.next_chars.add(name[i + 1])
+                self.next_chars.add(bigram[1])
+
+    def _pairs(self, name: str) -> list[tuple[str, str]]:
+        """Return the consecutive character pairs of name, lowercased and wrapped with START and END."""
+        chars = [START] + list(name.lower()) + [END]
+        return [(chars[i], chars[i + 1]) for i in range(len(chars) - 1)]
 
     def count(self, first_char: str, second_char: str) -> int:
         """Return how many times second_char followed first_char in the training names."""
@@ -47,3 +50,13 @@ class Bigram:
         """Draw the next character after first_char, weighted by the row of first_char."""
         row = self.row(first_char)
         return rng.choices(list(row.keys()), weights=list(row.values()))[0]
+
+    def loss(self, names: list[str]) -> float:
+        """Return the average negative log-likelihood (mean of -ln P) over every pair of the given names, wrapped with START and END."""
+        total_loss = 0
+        total_pairs = 0
+        for name in names:
+            for first, second in self._pairs(name):
+                total_loss += -math.log(self.probability(first, second))
+                total_pairs += 1
+        return total_loss / total_pairs

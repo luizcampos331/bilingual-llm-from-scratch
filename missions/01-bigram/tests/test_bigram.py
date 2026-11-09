@@ -76,3 +76,10 @@ class TestSampling:
         for _ in range(1000):
             samples.append(bigram.sample_next("a", rng))
         assert samples.count("r") / len(samples) == pytest.approx(3 / 7, abs=0.05)
+
+
+class TestLoss:
+    def test_barbara_loss_is_mean_negative_log_of_its_pairs(self):
+        """Given a model trained on "barbara", expect loss(["barbara"]) to be the mean of -ln P over its 8 pairs (about 0.931, pytest.approx)."""
+        bigram = Bigram(["barbara"])
+        assert bigram.loss(["barbara"]) == pytest.approx(0.931, abs=0.001)
