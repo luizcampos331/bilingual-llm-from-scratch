@@ -11,7 +11,8 @@ class Bigram:
         """Count character pairs from the given names, wrapping each name with START and END."""
         self.bigram_count_pairs = {}
         for name in names:
-            name = [START] + list(name) + [END]
+            name_lower = name.lower()
+            name = [START] + list(name_lower) + [END]
             for i in range(len(name) - 1):
                 bigram = (name[i], name[i + 1])
                 self.bigram_count_pairs[bigram] = (
@@ -20,4 +21,4 @@ class Bigram:
 
     def count(self, first_char: str, second_char: str) -> int:
         """Return how many times second_char followed first_char in the training names."""
-        return self.bigram_count_pairs.get((first_char, second_char), 0)
+        return self.bigram_count_pairs.get((first_char.lower(), second_char.lower()), 0)

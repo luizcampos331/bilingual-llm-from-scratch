@@ -13,3 +13,11 @@ class TestCounting:
         bigram = Bigram(["barbara"])
         assert bigram.count("b", "a") == 2
         assert bigram.count("a", "r") == 2
+
+    def test_counting_ignores_case(self):
+        """Given "Barbara", expect the same counts as "barbara"."""
+        bigram = Bigram(["Barbara"])
+        assert bigram.count("B", "a") == 2
+        assert bigram.count("b", "A") == 2
+        assert bigram.count("A", "r") == 2
+        assert bigram.count("a", "R") == 2
