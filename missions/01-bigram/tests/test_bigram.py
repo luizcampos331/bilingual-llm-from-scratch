@@ -94,3 +94,13 @@ class TestLoss:
         """Given a model trained on "barbara", expect loss(["barbara"]) to be lower than loss(["ab"])."""
         bigram = Bigram(["barbara"])
         assert bigram.loss(["barbara"]) < bigram.loss(["ab"])
+
+
+class TestGeneration:
+    def test_generated_name_has_no_start_or_end_markers(self):
+        """Given a model trained on "barbara", expect generate() to return a string without START or END inside it."""
+        bigram = Bigram(["barbara"])
+        rng = random.Random(2147483647)
+        name = bigram.generate(rng)
+        assert START not in name
+        assert END not in name

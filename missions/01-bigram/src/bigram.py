@@ -60,3 +60,16 @@ class Bigram:
                 total_loss += -math.log(self.probability(first, second))
                 total_pairs += 1
         return total_loss / total_pairs
+
+    def generate(self, rng: random.Random) -> str:
+        """Generate a name by sampling from START, one character at a time, until END is drawn; return it without START and END."""
+        name = []
+        previous_char = START
+        while True:
+            char = self.sample_next(previous_char, rng)
+            if char == END:
+                break
+            previous_char = char
+            name.append(char)
+
+        return "".join(name)

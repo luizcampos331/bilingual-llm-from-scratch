@@ -18,7 +18,9 @@ dist/
 .ruff_cache/
 
 # ML artifacts: datasets and checkpoints are large and reproducible; never commit them
-data/
+**/data/*
+# Exception: makemore names.txt (Mission 1), small and used as a fixed reference
+!missions/01-bigram/data/names.txt
 *.pt
 *.pth
 *.bin
