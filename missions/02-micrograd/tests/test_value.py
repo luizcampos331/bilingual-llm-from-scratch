@@ -13,3 +13,10 @@ class TestValues:
         value2 = Value(-3)
         result = value1 + value2
         assert result.data == -1
+
+    def test_multiplying_two_values(self):
+        """Given Value(2) * Value(-3), expect a Value with data -6."""
+        value1 = Value(2)
+        value2 = Value(-3)
+        result = value1 * value2
+        assert result.data == -6
