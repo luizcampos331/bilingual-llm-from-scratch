@@ -20,3 +20,14 @@ class TestValues:
         value2 = Value(-3)
         result = value1 * value2
         assert result.data == -6
+
+    def test_paper_expression(self):
+        """Given a=2, b=-3, c=10 and f=-2, expect L = (a * b + c) * f to have data -8."""
+        a = Value(2)
+        b = Value(-3)
+        c = Value(10)
+        f = Value(-2)
+        e = a * b
+        d = e + c
+        L = d * f
+        assert L.data == -8
