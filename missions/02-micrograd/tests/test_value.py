@@ -1,3 +1,4 @@
+import pytest
 from value import Value
 
 
@@ -58,3 +59,12 @@ class TestLocalBackward:
         L._backward()
         assert d.grad == -2
         assert f.grad == 4
+
+    def test_tanh_value_and_grad(self):
+        """Given n = 0.8814, expect o = n.tanh() to be about 0.7071, and with o.grad = 1, expect o._backward() to set n.grad to about 0.5 (1 - o**2)."""
+        n = Value(0.8814)
+        o = n.tanh()
+        assert o.data == pytest.approx(0.7071, abs=0.0001)
+        o.grad = 1
+        o._backward()
+        assert n.grad == pytest.approx(0.5, abs=0.0001)

@@ -1,5 +1,7 @@
 """Scalar value with automatic gradient computation (Mission 2, micrograd)."""
 
+import math
+
 
 class Value:
     """A single number that remembers how it was computed, so its gradient can be found later."""
@@ -28,6 +30,16 @@ class Value:
         def _backward():
             self.grad += other.data * out.grad
             other.grad += self.data * out.grad
+
+        out._backward = _backward
+        return out
+
+    def tanh(self) -> "Value":
+        """Return a new Value whose data is tanh(self.data), a number squashed into the range -1 to 1."""
+        out = Value(math.tanh(self.data))
+
+        def _backward():
+            self.grad += (1 - out.data**2) * out.grad
 
         out._backward = _backward
         return out
