@@ -24,4 +24,10 @@ class Value:
     def __mul__(self, other: "Value") -> "Value":
         """Return a new Value whose data is self.data * other.data."""
         out = Value(self.data * other.data)
+
+        def _backward():
+            self.grad += other.data * out.grad
+            other.grad += self.data * out.grad
+
+        out._backward = _backward
         return out

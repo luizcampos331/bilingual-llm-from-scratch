@@ -48,3 +48,13 @@ class TestLocalBackward:
         d._backward()
         assert e.grad == 1
         assert c.grad == 1
+
+    def test_multiplication_grad_is_the_other_value(self):
+        """Given L = d * f with d=4, f=-2 and L.grad = 1, expect L._backward() to set d.grad to -2 (value of f) and f.grad to 4 (value of d)."""
+        d = Value(4)
+        f = Value(-2)
+        L = d * f
+        L.grad = 1
+        L._backward()
+        assert d.grad == -2
+        assert f.grad == 4
