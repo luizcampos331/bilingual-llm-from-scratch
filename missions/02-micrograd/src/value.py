@@ -2,8 +2,12 @@
 
 
 class Value:
-    """A single number."""
+    """A single number"""
 
     def __init__(self, data: float):
-        """Store data."""
+        """Store data and start grad at 0."""
         self.data = data
+
+    def __add__(self, other: "Value") -> "Value":
+        """Return a new Value whose data is self.data + other.data."""
+        return Value(self.data + other.data)
