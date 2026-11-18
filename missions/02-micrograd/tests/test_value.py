@@ -31,3 +31,8 @@ class TestValues:
         d = e + c
         L = d * f
         assert L.data == -8
+
+    def test_grad_starts_at_zero(self):
+        """Given a new Value, expect grad to be 0."""
+        value = Value(2)
+        assert value.grad == 0
