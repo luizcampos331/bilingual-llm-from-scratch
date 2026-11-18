@@ -12,10 +12,10 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["missions"]
-pythonpath = ["missions/01-bigram/src"]
+pythonpath = ["missions/01-bigram/src", "missions/02-micrograd/src"]
 addopts = ["--import-mode=importlib"]
 
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-extraPaths = ["missions/01-bigram/src"]
+extraPaths = ["missions/01-bigram/src", "missions/02-micrograd/src"]
