@@ -3,8 +3,8 @@
 import math
 import random
 
-START = "<s>"
-END = "<e>"
+START = "."
+END = "."
 
 
 class Bigram:

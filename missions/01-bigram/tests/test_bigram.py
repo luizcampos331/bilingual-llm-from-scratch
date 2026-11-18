@@ -9,8 +9,17 @@ class TestCounting:
     def test_barbara_has_eight_pairs(self):
         """Given "barbara", expect 8 pairs, including START and END."""
         bigram = Bigram(["barbara"])
-        pairs = bigram.bigram_count_pairs
-        assert sum(pairs.values()) == 8
+        pairs = 0
+        for first, second in [
+            (START, "b"),
+            ("b", "a"),
+            ("a", "r"),
+            ("r", "b"),
+            ("r", "a"),
+            ("a", END),
+        ]:
+            pairs += bigram.count(first, second)
+        assert pairs == 8
 
     def test_barbara_counts_ba_and_ar_twice(self):
         """Given "barbara", expect "ba" and "ar" to each have count 2."""
@@ -26,10 +35,16 @@ class TestCounting:
         assert bigram.count("A", "r") == 2
         assert bigram.count("a", "R") == 2
 
+    def test_dot_marks_start_and_end_of_name(self):
+        """Given "barbara", expect "." to mark both the start and the end of a name: count(".", "b") and count("a", ".") are 1."""
+        bigram = Bigram(["barbara"])
+        assert bigram.count(".", "b") == 1
+        assert bigram.count("a", ".") == 1
+
 
 class TestProbabilities:
     def test_barbara_row_for_a_has_expected_probabilities(self):
-        """Given "barbara" with +1 smoothing, expect the row for "a" to be ar = 3/7 and a<e> = 2/7 (pytest.approx)."""
+        """Given "barbara" with +1 smoothing, expect the row for "a" to be ar = 3/7 and a. = 2/7 (pytest.approx)."""
         bigram = Bigram(["barbara"])
         assert bigram.probability("a", "r") == pytest.approx(3 / 7)
         assert bigram.probability("a", END) == pytest.approx(2 / 7)
@@ -40,7 +55,7 @@ class TestProbabilities:
         assert bigram.probability("a", "b") == pytest.approx(1 / 7)
 
     def test_every_row_with_counts_sums_to_one(self):
-        """Given "barbara", expect every row with counts (<s>, b, a, r) to sum to 1."""
+        """Given "barbara", expect every row with counts (., b, a, r) to sum to 1."""
         bigram = Bigram(["barbara"])
         for first in [START, "b", "a", "r"]:
             total = sum(bigram.row(first).values())
@@ -49,7 +64,7 @@ class TestProbabilities:
 
 class TestSampling:
     def test_sample_after_a_is_always_in_row(self):
-        """Given "barbara" and a seeded generator, expect every sample after "a" to be one of the keys of row("a") (b, a, r, <e>)."""
+        """Given "barbara" and a seeded generator, expect every sample after "a" to be one of the keys of row("a") (b, a, r, .)."""
         bigram = Bigram(["barbara"])
         row = bigram.row("a")
         rng = random.Random(2147483647)
