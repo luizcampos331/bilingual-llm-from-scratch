@@ -36,3 +36,15 @@ class TestValues:
         """Given a new Value, expect grad to be 0."""
         value = Value(2)
         assert value.grad == 0
+
+
+class TestLocalBackward:
+    def test_addition_passes_grad_through(self):
+        """Given d = e + c with d.grad = 1, expect d._backward() to set e.grad and c.grad to 1."""
+        e = Value(-6)
+        c = Value(10)
+        d = e + c
+        d.grad = 1
+        d._backward()
+        assert e.grad == 1
+        assert c.grad == 1
