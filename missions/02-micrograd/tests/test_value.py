@@ -38,6 +38,15 @@ class TestValues:
         value = Value(2)
         assert value.grad == 0
 
+    def test_value_remembers_its_parents(self):
+        """Given a and b typed by hand and c = a + b, expect c._prev to be {a, b} and a._prev to be empty."""
+        a = Value(2)
+        b = Value(-3)
+        c = a + b
+        assert c._prev == {a, b}
+        assert a._prev == set()
+        assert b._prev == set()
+
 
 class TestLocalBackward:
     def test_addition_passes_grad_through(self):
