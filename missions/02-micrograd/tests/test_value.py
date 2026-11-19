@@ -77,3 +77,23 @@ class TestLocalBackward:
         o.grad = 1
         o._backward()
         assert n.grad == pytest.approx(0.5, abs=0.0001)
+
+
+class TestBackward:
+    def test_backward_fills_paper_expression(self):
+        """Given L = (a * b + c) * f with a=2, b=-3, c=10, f=-2, expect L.backward() to set grads a=6, b=-4, c=-2, e=-2, d=-2, f=4 and L=1."""
+        a = Value(2)
+        b = Value(-3)
+        c = Value(10)
+        f = Value(-2)
+        e = a * b
+        d = e + c
+        L = d * f
+        L.backward()
+        assert a.grad == 6
+        assert b.grad == -4
+        assert c.grad == -2
+        assert f.grad == 4
+        assert e.grad == -2
+        assert d.grad == -2
+        assert L.grad == 1
