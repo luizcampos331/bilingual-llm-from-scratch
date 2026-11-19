@@ -97,3 +97,18 @@ class TestBackward:
         assert e.grad == -2
         assert d.grad == -2
         assert L.grad == 1
+
+    def test_backward_fills_neuron(self):
+        """Given the paper neuron x1=2, w1=-3, x2=0, w2=1, b=6.8814 and o = tanh(x1*w1 + x2*w2 + b), expect o.backward() to set w1.grad=1, w2.grad=0, b.grad=0.5 and x1.grad=-1.5 (pytest.approx)."""
+        x1 = Value(2)
+        w1 = Value(-3)
+        x2 = Value(0)
+        w2 = Value(1)
+        b = Value(6.8814)
+        n = x1 * w1 + x2 * w2 + b
+        o = n.tanh()
+        o.backward()
+        assert w1.grad == pytest.approx(1, abs=0.0001)
+        assert w2.grad == pytest.approx(0, abs=0.0001)
+        assert b.grad == pytest.approx(0.5, abs=0.0001)
+        assert x1.grad == pytest.approx(-1.5, abs=0.0001)
