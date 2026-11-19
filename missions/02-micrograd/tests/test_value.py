@@ -112,3 +112,10 @@ class TestBackward:
         assert w2.grad == pytest.approx(0, abs=0.0001)
         assert b.grad == pytest.approx(0.5, abs=0.0001)
         assert x1.grad == pytest.approx(-1.5, abs=0.0001)
+
+    def test_reused_value_accumulates_grad(self):
+        """Given b = a + a, expect b.backward() to set a.grad to 2, because a is used twice."""
+        a = Value(2)
+        b = a + a
+        b.backward()
+        assert a.grad == 2
