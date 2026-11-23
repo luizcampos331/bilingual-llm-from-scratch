@@ -22,6 +22,14 @@ class TestValues:
         result = value1 * value2
         assert result.data == -6
 
+    def test_plain_number_works_with_value(self):
+        """Given a = Value(2), expect a + 3 to have data 5 and a * 3 to have data 6 (the plain number 3 is wrapped in a Value)."""
+        a = Value(2)
+        resultAdd = a + 3
+        resultMul = a * 3
+        assert resultAdd.data == 5
+        assert resultMul.data == 6
+
     def test_paper_expression(self):
         """Given a=2, b=-3, c=10 and f=-2, expect L = (a * b + c) * f to have data -8."""
         a = Value(2)

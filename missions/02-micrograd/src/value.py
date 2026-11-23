@@ -13,8 +13,9 @@ class Value:
         self._backward = lambda: None
         self._prev = set(_children)
 
-    def __add__(self, other: "Value") -> "Value":
+    def __add__(self, other: "Value | float") -> "Value":
         """Return a new Value whose data is self.data + other.data."""
+        other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data + other.data, (self, other))
 
         def _backward():
@@ -24,7 +25,8 @@ class Value:
         out._backward = _backward
         return out
 
-    def __mul__(self, other: "Value") -> "Value":
+    def __mul__(self, other: "Value | float") -> "Value":
+        other = other if isinstance(other, Value) else Value(other)
         """Return a new Value whose data is self.data * other.data."""
         out = Value(self.data * other.data, (self, other))
 
