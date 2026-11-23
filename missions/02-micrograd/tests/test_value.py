@@ -30,6 +30,12 @@ class TestValues:
         assert resultAdd.data == 5
         assert resultMul.data == 6
 
+    def test_plain_number_on_the_left_of_multiplication(self):
+        """Given a = Value(2), expect 3 * a to have data 6 (Python falls back to a.__rmul__(3))."""
+        a = Value(2)
+        result = 3 * a
+        assert result.data == 6
+
     def test_paper_expression(self):
         """Given a=2, b=-3, c=10 and f=-2, expect L = (a * b + c) * f to have data -8."""
         a = Value(2)

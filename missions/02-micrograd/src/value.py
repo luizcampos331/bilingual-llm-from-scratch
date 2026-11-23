@@ -37,6 +37,10 @@ class Value:
         out._backward = _backward
         return out
 
+    def __rmul__(self, other: "Value | float") -> "Value":
+        """Called by Python for 3 * a (number on the left): multiplication order does not matter, so return self * other."""
+        return self * other
+
     def tanh(self) -> "Value":
         """Return a new Value whose data is tanh(self.data), a number squashed into the range -1 to 1."""
         out = Value(math.tanh(self.data), (self,))
