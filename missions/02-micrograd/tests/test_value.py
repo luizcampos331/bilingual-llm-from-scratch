@@ -90,6 +90,16 @@ class TestLocalBackward:
         assert d.grad == -2
         assert f.grad == 4
 
+    def test_subtraction_grad_is_one_and_minus_one(self):
+        """Given c = a - b, with c.grad = 1, expect c._backward() to set a.grad to 1 and b.grad to -1 (if b goes up, c goes down)."""
+        a = Value(5)
+        b = Value(2)
+        c = a - b
+        c.grad = 1
+        c._backward()
+        assert a.grad == 1
+        assert b.grad == -1
+
     def test_tanh_value_and_grad(self):
         """Given n = 0.8814, expect o = n.tanh() to be about 0.7071, and with o.grad = 1, expect o._backward() to set n.grad to about 0.5 (1 - o**2)."""
         n = Value(0.8814)

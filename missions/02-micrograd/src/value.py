@@ -38,9 +38,15 @@ class Value:
         return out
 
     def __sub__(self, other: "Value | float") -> "Value":
-        """Return a new Value whose data is self.data - other.data."""
+        """Return a new Value whose data is self.data - other.data; on backward, self gets +1 times the grad and other gets -1 times the grad."""
         other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data - other.data, (self, other))
+
+        def _backward():
+            self.grad += 1.0 * out.grad
+            other.grad += -1.0 * out.grad
+
+        out._backward = _backward
         return out
 
     def __rmul__(self, other: "Value | float") -> "Value":
