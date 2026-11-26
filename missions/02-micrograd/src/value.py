@@ -49,6 +49,11 @@ class Value:
         out._backward = _backward
         return out
 
+    def __pow__(self, other: float) -> "Value":
+        """Return a new Value whose data is self.data ** other (other is a plain number, not a Value)."""
+        out = Value(self.data**other, (self, other))
+        return out
+
     def __rmul__(self, other: "Value | float") -> "Value":
         """Called by Python for 3 * a (number on the left): multiplication order does not matter, so return self * other."""
         return self * other

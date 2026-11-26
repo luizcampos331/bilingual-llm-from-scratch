@@ -29,6 +29,12 @@ class TestValues:
         result = a - b
         assert result.data == 3
 
+    def test_power_of_a_value(self):
+        """Given a = Value(3), expect a ** 2 to have data 9."""
+        a = Value(3)
+        result = a**2
+        assert result.data == 9
+
     def test_plain_number_works_with_value(self):
         """Given a = Value(2), expect a + 3 to have data 5 and a * 3 to have data 6 (the plain number 3 is wrapped in a Value)."""
         a = Value(2)
