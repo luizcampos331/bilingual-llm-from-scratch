@@ -63,6 +63,10 @@ class Value:
         """Called by Python for 3 * a (number on the left): multiplication order does not matter, so return self * other."""
         return self * other
 
+    def __radd__(self, other: "Value | float") -> "Value":
+        """Called by Python for 3 + a (number on the left), which is also what sum() does when it starts from 0: addition order does not matter, so return self + other."""
+        return self + other
+
     def tanh(self) -> "Value":
         """Return a new Value whose data is tanh(self.data), a number squashed into the range -1 to 1."""
         out = Value(math.tanh(self.data), (self,))

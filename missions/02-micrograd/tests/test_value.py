@@ -49,6 +49,15 @@ class TestValues:
         result = 3 * a
         assert result.data == 6
 
+    def test_plain_number_on_the_left_of_addition(self):
+        """Given a = Value(2), expect 3 + a to have data 5, and sum([Value(1), Value(2)]) (which starts from 0) to have data 3."""
+        a = Value(2)
+        resultAdd = 3 + a
+        resultSum = sum([Value(1), Value(2)])
+        assert resultAdd.data == 5
+        assert isinstance(resultSum, Value)
+        assert resultSum.data == 3
+
     def test_paper_expression(self):
         """Given a=2, b=-3, c=10 and f=-2, expect L = (a * b + c) * f to have data -8."""
         a = Value(2)
