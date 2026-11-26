@@ -37,6 +37,12 @@ class Value:
         out._backward = _backward
         return out
 
+    def __sub__(self, other: "Value | float") -> "Value":
+        """Return a new Value whose data is self.data - other.data."""
+        other = other if isinstance(other, Value) else Value(other)
+        out = Value(self.data - other.data, (self, other))
+        return out
+
     def __rmul__(self, other: "Value | float") -> "Value":
         """Called by Python for 3 * a (number on the left): multiplication order does not matter, so return self * other."""
         return self * other

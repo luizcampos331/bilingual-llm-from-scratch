@@ -22,6 +22,13 @@ class TestValues:
         result = value1 * value2
         assert result.data == -6
 
+    def test_subtracting_two_values(self):
+        """Given a = Value(5) and b = Value(2), expect a - b to have data 3."""
+        a = Value(5)
+        b = Value(2)
+        result = a - b
+        assert result.data == 3
+
     def test_plain_number_works_with_value(self):
         """Given a = Value(2), expect a + 3 to have data 5 and a * 3 to have data 6 (the plain number 3 is wrapped in a Value)."""
         a = Value(2)
