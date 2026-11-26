@@ -50,8 +50,13 @@ class Value:
         return out
 
     def __pow__(self, other: float) -> "Value":
-        """Return a new Value whose data is self.data ** other (other is a plain number, not a Value)."""
-        out = Value(self.data**other, (self, other))
+        """Return a new Value whose data is self.data ** other; other is a plain number, so only self is a child and, on backward, gets other * self.data ** (other - 1) times the grad."""
+        out = Value(self.data**other, (self,))
+
+        def _backward():
+            self.grad += other * self.data ** (other - 1) * out.grad
+
+        out._backward = _backward
         return out
 
     def __rmul__(self, other: "Value | float") -> "Value":

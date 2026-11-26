@@ -115,6 +115,14 @@ class TestLocalBackward:
         o._backward()
         assert n.grad == pytest.approx(0.5, abs=0.0001)
 
+    def test_power_grad_is_exponent_times_base_to_exponent_minus_one(self):
+        """Given b = a ** 2 with a = Value(3), with b.grad = 1, expect b._backward() to set a.grad to 6 (2 * 3 ** 1)."""
+        a = Value(3)
+        b = a**2
+        b.grad = 1
+        b._backward()
+        assert a.grad == 6
+
 
 class TestBackward:
     def test_backward_fills_paper_expression(self):
