@@ -1,6 +1,9 @@
 """A multi-layer perceptron built on Layer (Mission 2, micrograd)."""
 
+from collections.abc import Sequence
+
 from layer import Layer
+from value import Value
 
 
 class MLP:
@@ -12,3 +15,8 @@ class MLP:
         self.layers = [
             Layer(layer_sizes[i], layer_sizes[i + 1]) for i in range(len(nouts))
         ]
+
+    def __call__(self, x: Sequence[float | Value]) -> Sequence[float | Value]:
+        for layer in self.layers:
+            x = layer(x)
+        return x
