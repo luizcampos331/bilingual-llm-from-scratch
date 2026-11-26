@@ -143,6 +143,13 @@ class TestBackward:
         assert d.grad == -2
         assert L.grad == 1
 
+    def test_backward_through_power(self):
+        """Given b = a ** 2 with a = Value(3), expect b.backward() to run without error and set a.grad to 6 (the plain number 2 is not a node in the graph)."""
+        a = Value(3)
+        b = a**2
+        b.backward()
+        assert a.grad == 6
+
     def test_backward_fills_neuron(self):
         """Given the paper neuron x1=2, w1=-3, x2=0, w2=1, b=6.8814 and o = tanh(x1*w1 + x2*w2 + b), expect o.backward() to set w1.grad=1, w2.grad=0, b.grad=0.5 and x1.grad=-1.5 (pytest.approx)."""
         x1 = Value(2)
